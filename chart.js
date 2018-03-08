@@ -344,6 +344,10 @@ function mouseover(d, i) {
     .style("top", (parseInt(d3.select(this).attr("cy") - (d.radius+150)) + offset.top) + "px")
 		.html(infoBox)
 			.style("display","block");
+	//!!!!!!fwnitiki entoli!!!!!!!!
+	
+	var voice = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
+	window.speechSynthesis.speak(voice);
 	
 	
 	}

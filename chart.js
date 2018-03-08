@@ -96,7 +96,7 @@ function start() {
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout);
 	//!!!!!!sindesi selidas!!!! 
-		//.on("click", function(d) { window.open("http://www.google.com/search?q=" + d.donor);});
+		.on("click", function(d) { window.open("http://www.google.com/search?q=" + d.donor);});
 		// Alternative title based 'tooltips'
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
@@ -350,8 +350,8 @@ function mouseover(d, i) {
 			.style("display","block");
 	
 	//!!!! dimiourgia omilias!!!!
-	//var voice = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
-	//window.speechSynthesis.speak(voice);
+	var voice = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
+	window.speechSynthesis.speak(voice);
 
 	
 	

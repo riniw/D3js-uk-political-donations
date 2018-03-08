@@ -21,6 +21,8 @@ var entityCentres = {
 		individual: {x: w / 3.65, y: h / 3.3},
 	};
 
+// !!!!!!! change color balls !!!!
+
 var fill = d3.scale.ordinal().range(["#BF666F", "#EBD237", "#292ED2"]);
 
 var svgCentre = { 

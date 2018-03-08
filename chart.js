@@ -349,6 +349,11 @@ function mouseover(d, i) {
 		.html(infoBox)
 			.style("display","block");
 	
+	//!!!! dimiourgia omilias!!!!
+	var voice = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
+	window.speechSynthesis.speak(voice);
+
+	
 	
 	}
 

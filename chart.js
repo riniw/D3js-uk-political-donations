@@ -350,8 +350,8 @@ function mouseover(d, i) {
 			.style("display","block");
 	
 	//!!!! dimiourgia omilias!!!!
-	//var voice = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
-	//window.speechSynthesis.speak(voice);
+	var voice = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
+	window.speechSynthesis.speak(voice);
 
 	
 	

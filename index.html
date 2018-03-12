@@ -35,18 +35,21 @@
     
     <style type="text/css">
         
-        .zoom {
-    
-    background-color: green;
-    transition: transform .2s; /* Animation */
-    
-    
-    
+       .zoom {
+   -webkit-transition: all .3s ease-out;
+   -moz-transition: all .3s ease-out;
+   -o-transition: all .3s ease-out;
+   transition: all .3s ease-out;
 }
-      
-        .zoom:hover {
-    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-}
+.zoom:hover {
+   -moz-transform: scale(1.6);
+   -webkit-transform: scale(1.6);
+   -o-transform: scale(1.6);
+   transform: scale(1.6);
+   -ms-transform: scale(1.6);
+filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand',
+   M11=2, M12=-0, M21=0, M22=2);}
+        
     </style>
 
 <body>

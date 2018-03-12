@@ -54,8 +54,27 @@ filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand',
     
     
     
- 
  }
+        
+        .zoom2
+        {
+   -webkit-transition: all .3s ease-out;
+   -moz-transition: all .3s ease-out;
+   -o-transition: all .3s ease-out;
+   transition: all .3s ease-out;
+        }
+        
+   .zoom2:hover
+        {
+   -moz-transform: scale(1.15);
+   -webkit-transform: scale(1.15);
+   -o-transform: scale(1.15);
+   transform: scale(1.15);
+   -ms-transform: scale(1.15);
+filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand',
+   M11=2, M12=-0, M21=0, M22=2);   
+    color: rgb(169,35,48);
+        }
         
     </style>
 
@@ -130,7 +149,7 @@ filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand',
         <div id="view-source-type">
             <div id="public-or-private-money" class="public-private">
                 <h3 class=zoom>Public money vs private cash</h3>
-                <p class=zoom>Despite general public opposition to more taxpayer money being given to political parties, public funds are already provided to opposition parties in the form of 'short money' from the House of Commons, House of Lords and Scottish Parliament.</p>
+                <p class=zoom2>Despite general public opposition to more taxpayer money being given to political parties, public funds are already provided to opposition parties in the form of 'short money' from the House of Commons, House of Lords and Scottish Parliament.</p>
                 <p class=zoom>The parties also benefit from 'Policy development grants' given by the Electoral Commission.</p>
             </div>
             <div id="public-or-private-money-split" class="public-private">

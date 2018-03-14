@@ -81,8 +81,6 @@ function transition(name) {
 
 	//jhghgdgfmh
 if (name === "group-by-amount"){
-		sound.currentTime=0; 
-		sound.play();
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
 		$("#view-donor-type").fadeOut(250);
@@ -137,7 +135,7 @@ function total() {
 		.start();
 }
 
-//hghggsgfdhgghgk
+//nea sinartisi gia to kainourio pedio
 
 function amountType() {
 	force.gravity(0)
@@ -211,7 +209,7 @@ function all(e) {
 			.attr("cy", function(d) {return d.y; });
 }
 
-//kjhjfgfdfghghkhkj
+//neos kwdikas gia to diaxorismo ton kuklwn
 function moveToAmount(alpha) {
 	return function(d) {
 		

@@ -384,7 +384,7 @@ function mouseover(d, i) {
 		.html(infoBox)
 			.style("display","block");
 	
-	//!!!! dimiourgia omilias!!!!
+	//afigisi doriti kai posou doreas
 	var omilia = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
 	window.speechSynthesis.speak(omilia);
 

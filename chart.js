@@ -24,7 +24,7 @@ var entityCentres = {
 		individual: {x: w / 3.65, y: h / 3.3},
 	};
 
-// !!!!!!! change color balls !!!!
+// allagi xromaton stis mpales
 
 var fill = d3.scale.ordinal().range(["#A92330", "#787375", "#F19EB8"]);
 

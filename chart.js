@@ -114,7 +114,7 @@ function start() {
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
 	
-	        .on("click",anazitisi);
+	      //  .on("click",anazitisi);
 
 		force.gravity(0)
 			.friction(0.75)
@@ -344,10 +344,10 @@ function display(data) {
 }
 
 //sinartisi anazitisis
-function anazitisi(d) { 
-	var donor=d.donor;
-	window.open("https://www.google.com/search?q=" + donor);
-}
+//function anazitisi(d) { 
+//	var donor=d.donor;
+//	window.open("https://www.google.com/search?q=" + donor);
+//}
 
 function mouseover(d, i) {
 	// tooltip popup

@@ -5,6 +5,9 @@ var nodes = [];
 var force, node, data, maxVal;
 var brake = 0.2;
 var radius = d3.scale.sqrt().range([10, 20]);
+//fdglkjfgjlkfdjgsindesmos
+//var sindesmos = "http://www.google.com/search?q=";
+
 
 var partyCentres = { 
     con: { x: w / 3, y: h / 3.3}, 
@@ -79,7 +82,17 @@ function transition(name) {
 		return fundsType();
 	}
 
-	
+if (name === "group-by-amount"){
+		sound.currentTime=0; 
+		sound.play();
+		$("#initial-content").fadeOut(250);
+		$("#value-scale").fadeOut(250);
+		$("#view-donor-type").fadeOut(250);
+		$("#view-party-type").fadeOut(250);
+		$("#view-source-type").fadeOut(1000);
+		$("#view-amount-type").fadeIn(250);
+		return amountType();
+	}
 }	
 
 function start() {
@@ -99,12 +112,12 @@ function start() {
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout);
-	       
+	       // .on("click", function(d) { window.open(sindesmos + d.donor)});
+	//!!!!!!sindesi selidas!!!! 
+		//.on("click", function(d) { window.open("http://www.google.com/search?q=" + d.donor);});
 		// Alternative title based 'tooltips'
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
-	
-	      //  .on("click",anazitisi);
 
 		force.gravity(0)
 			.friction(0.75)
@@ -126,7 +139,13 @@ function total() {
 		.start();
 }
 
-
+function amountType() {
+	force.gravity(0)
+		.friction(0.85)
+		.charge(function(d) { return -Math.pow(d.radius, 2) / 2.5; })
+		.on("tick", amounts)
+		.start();
+}
 
 function partyGroup() {
 	force.gravity(0)
@@ -191,9 +210,6 @@ function all(e) {
 		node.attr("cx", function(d) { return d.x; })
 			.attr("cy", function(d) {return d.y; });
 }
-
-
-
 
 
 function moveToCentre(alpha) {
@@ -330,12 +346,6 @@ function display(data) {
 	return start();
 }
 
-//sinartisi anazitisis
-//function anazitisi(d) { 
-//	var donor=d.donor;
-//	window.open("https://www.google.com/search?q=" + donor);
-//}
-
 function mouseover(d, i) {
 	// tooltip popup
 	var mosie = d3.select(this);
@@ -374,7 +384,7 @@ function mouseover(d, i) {
 		.html(infoBox)
 			.style("display","block");
 	
-	//afigisi doriti kai posou doreas
+	//!!!! dimiourgia omilias!!!!
 	var omilia = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
 	window.speechSynthesis.speak(omilia);
 

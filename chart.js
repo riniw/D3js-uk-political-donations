@@ -79,16 +79,7 @@ function transition(name) {
 		return fundsType();
 	}
 
-	//jhghgdgfmh
-if (name === "group-by-amount"){
-		$("#initial-content").fadeOut(250);
-		$("#value-scale").fadeOut(250);
-		$("#view-donor-type").fadeOut(250);
-		$("#view-party-type").fadeOut(250);
-		$("#view-source-type").fadeOut(1000);
-		$("#view-amount-type").fadeIn(250);
-		return amountType();
-	}
+	
 }	
 
 function start() {
@@ -135,15 +126,7 @@ function total() {
 		.start();
 }
 
-//nea sinartisi gia to kainourio pedio
 
-function amountType() {
-	force.gravity(0)
-		.friction(0.85)
-		.charge(function(d) { return -Math.pow(d.radius, 2) / 2.5; })
-		.on("tick", amounts)
-		.start();
-}
 
 function partyGroup() {
 	force.gravity(0)
@@ -209,25 +192,7 @@ function all(e) {
 			.attr("cy", function(d) {return d.y; });
 }
 
-//neos kwdikas gia to diaxorismo ton kuklwn
-function moveToAmount(alpha) {
-	return function(d) {
-		
-		if (d.value <= 50000) { 
-			centreX = svgCentre.x ;
-			centreY = svgCentre.y -50;
-		} else if (d.value <= 350000) { 
-			centreX = svgCentre.x + 150;
-			centreY = svgCentre.y ;
-		} else if (d.value <= 20000000){ 
-			centreX = svgCentre.x + 300;
-			centreY = svgCentre.y + 50;
-		}
 
-		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
-		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
-	};
-}
 
 
 

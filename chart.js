@@ -79,6 +79,7 @@ function transition(name) {
 		return fundsType();
 	}
 
+	//jhghgdgfmh
 if (name === "group-by-amount"){
 		sound.currentTime=0; 
 		sound.play();
@@ -135,6 +136,8 @@ function total() {
 		.on("tick", all)
 		.start();
 }
+
+//hghggsgfdhgghgk
 
 function amountType() {
 	force.gravity(0)
@@ -207,6 +210,27 @@ function all(e) {
 		node.attr("cx", function(d) { return d.x; })
 			.attr("cy", function(d) {return d.y; });
 }
+
+//kjhjfgfdfghghkhkj
+function moveToAmount(alpha) {
+	return function(d) {
+		
+		if (d.value <= 50000) { 
+			centreX = svgCentre.x ;
+			centreY = svgCentre.y -50;
+		} else if (d.value <= 350000) { 
+			centreX = svgCentre.x + 150;
+			centreY = svgCentre.y ;
+		} else if (d.value <= 20000000){ 
+			centreX = svgCentre.x + 300;
+			centreY = svgCentre.y + 50;
+		}
+
+		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
+		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
+	};
+}
+
 
 
 function moveToCentre(alpha) {

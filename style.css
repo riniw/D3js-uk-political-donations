@@ -26,8 +26,7 @@ li {
 }
 
 /* Initial appearance on load */
-
-#view-party-type, #view-donor-type, #view-source-type, {
+#view-party-type, #view-donor-type, #view-source-type {
     display: none;
 }
 
@@ -40,9 +39,6 @@ li {
     left: 650px;
     width: 272px;
 }
- 
-
-
 
 /*  Public or private funds view */
 

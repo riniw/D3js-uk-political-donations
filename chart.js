@@ -112,7 +112,8 @@ function start() {
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout);
-	       // .on("click", function(d) { window.open(sindesmos + d.donor)});
+	      
+         	.on("click", googleSearch);
 	//!!!!!!sindesi selidas!!!! 
 		//.on("click", function(d) { window.open("http://www.google.com/search?q=" + d.donor);});
 	      
@@ -412,4 +413,9 @@ $(document).ready(function() {
 
 });
 
+//sinartisi gia apotelesmata doriton
+function googleSearch(d) {
+  var donor = d.donor;
+  window.open("https://www.google.com/search?q=" + donor);
+}
 

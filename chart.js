@@ -5,8 +5,6 @@ var nodes = [];
 var force, node, data, maxVal;
 var brake = 0.2;
 var radius = d3.scale.sqrt().range([10, 20]);
-//fdglkjfgjlkfdjgsindesmos
-//var sindesmos = "http://www.google.com/search?q=";
 
 
 var partyCentres = { 
@@ -114,8 +112,7 @@ function start() {
 		.on("mouseout", mouseout);
 	      
          	.on("click", googleSearch);
-	//!!!!!!sindesi selidas!!!! 
-		//.on("click", function(d) { window.open("http://www.google.com/search?q=" + d.donor);});
+	
 	      
 		// Alternative title based 'tooltips'
 		// node.append("title")

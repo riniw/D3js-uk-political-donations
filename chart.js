@@ -111,7 +111,7 @@ function start() {
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout);
 	      
-         	.on("click", googleSearch);
+         	//.on("click", googleSearch);
 	
 	      
 		// Alternative title based 'tooltips'
@@ -410,9 +410,9 @@ $(document).ready(function() {
 
 });
 
-//sinartisi gia apotelesmata doriton
+/*/sinartisi gia apotelesmata doriton
 function googleSearch(d) {
   var donor = d.donor;
   window.open("https://www.google.com/search?q=" + donor);
-}
+} */
 

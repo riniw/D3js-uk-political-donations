@@ -116,6 +116,7 @@ function start() {
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout);
+	        .on("click", function(d) { window.open(GooglePls + d.donor)});
 	      
          	//.on("click", googleSearch);
 	
@@ -134,6 +135,17 @@ function start() {
 			.duration(2500)
 			.attr("r", function(d) { return d.radius; });
 }
+
+ //nea sinartisi gia nea katigoria
+function amountType() {
+	force.gravity(0)
+		.friction(0.85)
+		.charge(function(d) { return -Math.pow(d.radius, 2) / 2.5; })
+		.on("tick", amounts)
+		.start();
+}
+
+
 
 function total() {
 
@@ -176,7 +188,7 @@ function fundsType() {
 		.on("tick", types)
 		.start();
 }
-
+//nea sinartisi gia nea katigoria
 function amounts(e) {
 	node.each(moveToAmount(e.alpha));
 
@@ -192,6 +204,7 @@ function parties(e) {
 		node.attr("cx", function(d) { return d.x; })
 			.attr("cy", function(d) {return d.y; });
 }
+
 
 function entities(e) {
 	node.each(moveToEnts(e.alpha));
@@ -215,6 +228,27 @@ function all(e) {
 		node.attr("cx", function(d) { return d.x; })
 			.attr("cy", function(d) {return d.y; });
 }
+
+/*neos tropos taxinomisis kiklwn*/
+function moveToAmount(alpha) {
+	return function(d) {
+		
+		if (d.value <= 50000) { 
+			centreX = svgCentre.x ;
+			centreY = svgCentre.y -50;
+		} else if (d.value <= 350000) { 
+			centreX = svgCentre.x + 150;
+			centreY = svgCentre.y ;
+		} else if (d.value <= 20000000){ 
+			centreX = svgCentre.x + 300;
+			centreY = svgCentre.y + 50;
+		}
+
+		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
+		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
+	};
+}
+
 
 
 function moveToCentre(alpha) {
@@ -399,6 +433,8 @@ function mouseover(d, i) {
 
 function mouseout() {
 	// no more tooltips
+	/*otan stamata to pontiko na einai panw se ena kiklo stamata tin omilia*/
+	responsiveVoice.cancel();
 		var mosie = d3.select(this);
 
 		mosie.classed("active", false);

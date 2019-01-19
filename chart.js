@@ -424,8 +424,10 @@ function mouseover(d, i) {
 			.style("display","block");
 	
 	//!!!! dimiourgia omilias!!!!
-	var omilia = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
-	window.speechSynthesis.speak(omilia);
+	//var omilia = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
+	//window.speechSynthesis.speak(omilia);
+	
+	responsiveVoice.speak("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
 
 	
 	
@@ -434,7 +436,7 @@ function mouseover(d, i) {
 function mouseout() {
 	// no more tooltips
 	/*otan stamata to pontiko na einai panw se ena kiklo stamata tin omilia*/
-	window.speechSynthesis.cancel(omilia);
+        	responsiveVoice.cancel();
 		var mosie = d3.select(this);
 
 		mosie.classed("active", false);

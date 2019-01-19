@@ -434,7 +434,7 @@ function mouseover(d, i) {
 function mouseout() {
 	// no more tooltips
 	/*otan stamata to pontiko na einai panw se ena kiklo stamata tin omilia*/
-	window.speechSynthesis.cancel();
+	window.speechSynthesis.cancel(omilia);
 		var mosie = d3.select(this);
 
 		mosie.classed("active", false);

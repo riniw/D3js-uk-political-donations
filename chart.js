@@ -5,12 +5,14 @@ var nodes = [];
 var force, node, data, maxVal;
 var brake = 0.2;
 var radius = d3.scale.sqrt().range([10, 20]);
+//paradoteo1
+var GooglePls = "http://www.google.com/search?q="; 
 
 
 var partyCentres = { 
     con: { x: w / 3, y: h / 3.3}, 
     lab: {x: w / 3, y: h / 2.3}, 
-    lib: {x: w / 3	, y: h / 1.8}
+    lib: {x: w / 3, y: h / 1.8}
   };
 
 var entityCentres = { 
@@ -19,7 +21,7 @@ var entityCentres = {
 		other: {x: w / 1.15, y: h / 1.9},
 		society: {x: w / 1.12, y: h  / 3.2 },
 		pub: {x: w / 1.8, y: h / 2.8},
-		individual: {x: w / 3.65, y: h / 3.3},
+		individual: {x: w / 3.65, y: h / 3.3}
 	};
 
 // allagi xromaton stis mpales
@@ -51,6 +53,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
+		$("#view-amount-type").fadeOut(250);
 		return total();
 		//location.reload();
 	}
@@ -60,6 +63,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeIn(1000);
+		$("#view-amount-type").fadeOut(250);
 		return partyGroup();
 	}
 	if (name === "group-by-donor-type") {
@@ -68,6 +72,7 @@ function transition(name) {
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-donor-type").fadeIn(1000);
+		$("#view-amount-type").fadeOut(250);
 		return donorType();
 	}
 	if (name === "group-by-money-source")
@@ -77,6 +82,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeIn(1000);
+		$("#view-amount-type").fadeOut(250);
 		return fundsType();
 	}
 
@@ -87,8 +93,8 @@ if (name === "group-by-amount"){
 		$("#value-scale").fadeOut(250);
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
-		$("#view-source-type").fadeOut(1000);
-		$("#view-amount-type").fadeIn(250);
+		$("#view-source-type").fadeOut(250);
+		$("#view-amount-type").fadeIn(1000);
 		return amountType();
 	}
 }	

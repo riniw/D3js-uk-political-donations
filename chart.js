@@ -10,7 +10,7 @@ var radius = d3.scale.sqrt().range([10, 20]);
 var partyCentres = { 
     con: { x: w / 3, y: h / 3.3}, 
     lab: {x: w / 3, y: h / 2.3}, 
-    lib: {x: w / 3, y: h / 1.8}
+    lib: {x: w / 3	, y: h / 1.8}
   };
 
 var entityCentres = { 
@@ -19,7 +19,7 @@ var entityCentres = {
 		other: {x: w / 1.15, y: h / 1.9},
 		society: {x: w / 1.12, y: h  / 3.2 },
 		pub: {x: w / 1.8, y: h / 2.8},
-		individual: {x: w / 3.65, y: h / 3.3}
+		individual: {x: w / 3.65, y: h / 3.3},
 	};
 
 // allagi xromaton stis mpales
@@ -51,8 +51,6 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
-		$("#view-amount-type").fadeOut(250);
-		$("#chart").fadeIn(1000);
 		return total();
 		//location.reload();
 	}
@@ -62,8 +60,6 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeIn(1000);
-		$("#view-amount-type").fadeOut(250);
-		$("#chart").fadeIn(1000);
 		return partyGroup();
 	}
 	if (name === "group-by-donor-type") {
@@ -72,8 +68,6 @@ function transition(name) {
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-donor-type").fadeIn(1000);
-		$("#view-amount-type").fadeOut(250);
-		$("#chart").fadeIn(1000);
 		return donorType();
 	}
 	if (name === "group-by-money-source")
@@ -83,8 +77,6 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeIn(1000);
-		$("#view-amount-type").fadeOut(250);
-		$("#chart").fadeIn(1000);
 		return fundsType();
 	}
 
@@ -95,9 +87,8 @@ if (name === "group-by-amount"){
 		$("#value-scale").fadeOut(250);
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
-		$("#view-source-type").fadeOut(250);
-		$("#view-amount-type").fadeIn(1000);
-	        $("#chart").fadeIn(1000);
+		$("#view-source-type").fadeOut(1000);
+		$("#view-amount-type").fadeIn(250);
 		return amountType();
 	}
 }	
@@ -119,9 +110,9 @@ function start() {
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout);
-	        .on("click", SearchGoogle); // prosthiki sinartisis gia anazitisi sto google
 	      
-         	
+         	//.on("click", googleSearch);
+	
 	      
 		// Alternative title based 'tooltips'
 		// node.append("title")
@@ -136,20 +127,7 @@ function start() {
 		node.transition()
 			.duration(2500)
 			.attr("r", function(d) { return d.radius; });
-			
-			drawTotalPie();
 }
-
- //nea sinartisi gia nea katigoria
-function amountType() {
-	force.gravity(0)
-		.friction(0.85)
-		.charge(function(d) { return -Math.pow(d.radius, 2) / 2.5; })
-		.on("tick", amounts)
-		.start();
-}
-
-
 
 function total() {
 
@@ -192,15 +170,12 @@ function fundsType() {
 		.on("tick", types)
 		.start();
 }
-//nea sinartisi gia nea katigoria
-function amountType() 
-{
-	
-	force.gravity(0)
-		.friction(0.85)
-		.charge(function(d) { return -Math.pow(d.radius, 2) / 2.5; })
-		.on("tick", amounts)
-		.start();
+
+function amounts(e) {
+	node.each(moveToAmount(e.alpha));
+
+		node.attr("cx", function(d) { return d.x; })
+			.attr("cy", function(d) {return d.y; });
 }
 
 
@@ -211,7 +186,6 @@ function parties(e) {
 		node.attr("cx", function(d) { return d.x; })
 			.attr("cy", function(d) {return d.y; });
 }
-
 
 function entities(e) {
 	node.each(moveToEnts(e.alpha));
@@ -234,30 +208,6 @@ function all(e) {
 
 		node.attr("cx", function(d) { return d.x; })
 			.attr("cy", function(d) {return d.y; });
-}
-
-/*neos tropos taxinomisis kiklwn*/
-function moveToAmount(alpha) {
-	return function(d) {
-		var centreX;
-		var centreY;
-		if (d.value <= 100000){
-			centreX = svgCentre.x +70;
-			centreY = svgCentre.y -70;
-		} else if (d.value <= 500000){
-			centreX = svgCentre.x +450;
-			centreY = svgCentre.y -70;
-		} else if (d.value <= 1000000){
-			centreX = svgCentre.x +70;
-			centreY = svgCentre.y +250;
-		} else {
-			centreX = svgCentre.x +500;
-			centreY = svgCentre.y +250;
-		}
-		
-		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
-		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
-	};
 }
 
 
@@ -432,45 +382,24 @@ function mouseover(d, i) {
     .style("top", (parseInt(d3.select(this).attr("cy") - (d.radius+150)) + offset.top) + "px")
 		.html(infoBox)
 			.style("display","block");
-	$("#mouseTrackingCrumbs").prepend("<img src='" + imageFile +"' width='60' height='60' onError='this.src=\"https://github.com/favicon.ico\";' /><br/>");
 	
-	// prosthiki omilias otan o xristis perna pano apo ton kiklo kapoiou doriti
-  omilia.text = donor + " for the " + party + " party" + amount + "pounds";
-  omilia.volume = 3;
-  omilia.rate = 0.5;
-  omilia.pitch = 1;
+	//!!!! dimiourgia omilias!!!!
+	var omilia = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
+	window.speechSynthesis.speak(omilia);
 
-  window.speechSynthesis.speak(omilia);   // on mouseover it speaks
-
+	
+	
 	}
-
-	
-	
-	
 
 function mouseout() {
 	// no more tooltips
-		var omilia = new SpeechSynthesisUtterance();
 		var mosie = d3.select(this);
 
 		mosie.classed("active", false);
 
 		d3.select(".tooltip")
 			.style("display", "none");
-		
-		// pausi omilias otan o xristis fevgi apo ton kiklo tou doriti
-		window.speechSynthesis.cancel(omilia);  
 		}
-
-//sinartisi gia anazitisi sto google
-function SearchGoogle(d)
-{
-    var query = d.donor + " " + d.entity + " " + d.partyLabel + " party";
-    url ='http://www.google.com/search?q=' + query;
-    window.open(url,'_blank');
-}
-
-
 
 $(document).ready(function() {
 		d3.selectAll(".switch").on("click", function(d) {
@@ -486,4 +415,5 @@ function googleSearch(d) {
   var donor = d.donor;
   window.open("https://www.google.com/search?q=" + donor);
 } */
+
 

@@ -52,6 +52,7 @@ function transition(name) {
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
 		$("#view-amount-type").fadeOut(250);
+		$("#chart").fadeIn(1000);
 		return total();
 		//location.reload();
 	}
@@ -62,6 +63,7 @@ function transition(name) {
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeIn(1000);
 		$("#view-amount-type").fadeOut(250);
+		$("#chart").fadeIn(1000);
 		return partyGroup();
 	}
 	if (name === "group-by-donor-type") {
@@ -71,6 +73,7 @@ function transition(name) {
 		$("#view-source-type").fadeOut(250);
 		$("#view-donor-type").fadeIn(1000);
 		$("#view-amount-type").fadeOut(250);
+		$("#chart").fadeIn(1000);
 		return donorType();
 	}
 	if (name === "group-by-money-source")
@@ -81,6 +84,7 @@ function transition(name) {
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeIn(1000);
 		$("#view-amount-type").fadeOut(250);
+		$("#chart").fadeIn(1000);
 		return fundsType();
 	}
 
@@ -93,6 +97,7 @@ if (name === "group-by-amount"){
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-amount-type").fadeIn(1000);
+	        $("#chart").fadeIn(1000);
 		return amountType();
 	}
 }	
@@ -131,6 +136,8 @@ function start() {
 		node.transition()
 			.duration(2500)
 			.attr("r", function(d) { return d.radius; });
+			
+			drawTotalPie();
 }
 
  //nea sinartisi gia nea katigoria
@@ -186,11 +193,14 @@ function fundsType() {
 		.start();
 }
 //nea sinartisi gia nea katigoria
-function amounts(e) {
-	node.each(moveToAmount(e.alpha));
-
-		node.attr("cx", function(d) { return d.x; })
-			.attr("cy", function(d) {return d.y; });
+function amountType() 
+{
+	
+	force.gravity(0)
+		.friction(0.85)
+		.charge(function(d) { return -Math.pow(d.radius, 2) / 2.5; })
+		.on("tick", amounts)
+		.start();
 }
 
 
@@ -229,23 +239,26 @@ function all(e) {
 /*neos tropos taxinomisis kiklwn*/
 function moveToAmount(alpha) {
 	return function(d) {
-		
-		if (d.value <= 50000) { 
-			centreX = svgCentre.x ;
-			centreY = svgCentre.y -50;
-		} else if (d.value <= 350000) { 
-			centreX = svgCentre.x + 150;
-			centreY = svgCentre.y ;
-		} else if (d.value <= 20000000){ 
-			centreX = svgCentre.x + 300;
-			centreY = svgCentre.y + 50;
+		var centreX;
+		var centreY;
+		if (d.value <= 100000){
+			centreX = svgCentre.x +70;
+			centreY = svgCentre.y -70;
+		} else if (d.value <= 500000){
+			centreX = svgCentre.x +450;
+			centreY = svgCentre.y -70;
+		} else if (d.value <= 1000000){
+			centreX = svgCentre.x +70;
+			centreY = svgCentre.y +250;
+		} else {
+			centreX = svgCentre.x +500;
+			centreY = svgCentre.y +250;
 		}
-
+		
 		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
 		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
 	};
 }
-
 
 
 function moveToCentre(alpha) {
@@ -419,27 +432,34 @@ function mouseover(d, i) {
     .style("top", (parseInt(d3.select(this).attr("cy") - (d.radius+150)) + offset.top) + "px")
 		.html(infoBox)
 			.style("display","block");
+	$("#mouseTrackingCrumbs").prepend("<img src='" + imageFile +"' width='60' height='60' onError='this.src=\"https://github.com/favicon.ico\";' /><br/>");
 	
-	//!!!! dimiourgia omilias!!!!
-	//var omilia = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
-	//window.speechSynthesis.speak(omilia);
-	
-	responsiveVoice.speak("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
+	// prosthiki omilias otan o xristis perna pano apo ton kiklo kapoiou doriti
+  omilia.text = donor + " for the " + party + " party" + amount + "pounds";
+  omilia.volume = 3;
+  omilia.rate = 0.5;
+  omilia.pitch = 1;
+
+  window.speechSynthesis.speak(omilia);   // on mouseover it speaks
+
+	}
 
 	
 	
-	}
+	
 
 function mouseout() {
 	// no more tooltips
-	/*otan stamata to pontiko na einai panw se ena kiklo stamata tin omilia*/
-        	responsiveVoice.cancel();
+		var omilia = new SpeechSynthesisUtterance();
 		var mosie = d3.select(this);
 
 		mosie.classed("active", false);
 
 		d3.select(".tooltip")
 			.style("display", "none");
+		
+		// pausi omilias otan o xristis fevgi apo ton kiklo tou doriti
+		window.speechSynthesis.cancel(omilia);  
 		}
 
 //sinartisi gia anazitisi sto google

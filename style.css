@@ -1,5 +1,5 @@
 body {
-    background-color:#FFFAF0;
+    background-color:#f9ffe6;
     font-family:'Raleway', 'Open Sans', sans-serif;
 }
 p {
@@ -11,39 +11,22 @@ strong {
 h1, h2, h3, h4, h5 {
     margin: 10px 0 15px 0;
 }
-
 header, nav {
     text-align: center;
     min-width: 767px;
 }
-
 li {
     display: inline;
 }
 
-#mouseTrackingCrumbs{
-    padding: 5px;
-    position: fixed;
-    right: 0;
-    left: 500;
-    bottom: 0;
-    width: 80px;
-    overflow-y: auto;
-}
-
-/* prosthiki zoom  200% otan to pontiki perna pano apo keimeno*/
-p:hover, h1:hover, h2:hover, h3:hover, h4:hover, h5:hover {
-    font-size: 150%;
-}
-
 /* 	Information boxes for different chart layouts */
 /* Positioning */
-#initial-content, #a, #b, #c, #d, #e, #f, #view-party-type, #view-donor-type, #view-source-type, #view-amount-type, #partyInfo, #conservative, #labour, #libdem, #individual, #company, #union, #society, #other, #public-or-private-money, #public-or-private-money-split, #private-money, #public-money { 
+#initial-content, #a, #b, #c, #d, #e, #f, #view-party-type, #view-donor-type, #view-source-type, #partyInfo, #conservative, #labour, #libdem, #individual, #company, #union, #society, #other, #public-or-private-money, #public-or-private-money-split, #private-money, #public-money { 
     position: absolute; 
 }
 
 /* Initial appearance on load */
-#view-party-type, #view-donor-type, #view-source-type, #view-amount-type {
+#view-party-type, #view-donor-type, #view-source-type {
     display: none;
 }
 
@@ -78,20 +61,17 @@ p:hover, h1:hover, h2:hover, h3:hover, h4:hover, h5:hover {
 }
 
 /*  Party view */
-
-/* allagi xromaton sta tria pedia omadopoiisis tou Split by Party */
 #conservative, #labour, #libdem { padding: 10px; }
 #conservative {
-    background: rgba(189,191,4, 0.8);
-    
+    background: rgba(160,157,158, 0.8); /*allagi xromatos sto pedio conservative*/
     top: 110px;
 }
 #labour {
-    background: rgba(255,250,240, 0.8);
+    background: rgba(220,87,99, 0.8); /*allagi xromatos sto pedio labour*/
     top: 330px;
 }
 #libdem {
-    background: rgba(219,223,225, 0.8);
+    background: rgba(248,206,219, 0.8); /*allagi xromatos sto pedio libdem */
     top: 550px;
 }
 
@@ -121,35 +101,6 @@ p:hover, h1:hover, h2:hover, h3:hover, h4:hover, h5:hover {
     text-align: right;
     right: 0
 }
-
-/* gia ti nea katigoria Split by amount: Amount scale */
-#div_0_100, #div_101_500, #div_501_1000, #div_more_1001 {
-    position: absolute; 
-    width: 200px;
-    text-align: center; 
-}
-
-#div_0_100 { 
-    top: 50px;
-    left: 220px;
-}
-
-#div_101_500 { 
-    top: 600px;
-    left: 220px;
-}
-
-#div_501_1000 { 
-    top: 50px;
-    left: 770px;
-}
-
-#div_more_1001 {
-    top: 500px;
-    left: 770px;
-}
-
-/* End of view */
 
 /* Value scale */
 

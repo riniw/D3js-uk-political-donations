@@ -33,7 +33,7 @@ li {
 
 /* prosthiki zoom  200% otan to pontiki perna pano apo keimeno*/
 p:hover, h1:hover, h2:hover, h3:hover, h4:hover, h5:hover {
-    font-size: 100%;
+    font-size: 150%;
 }
 
 /* 	Information boxes for different chart layouts */

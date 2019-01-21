@@ -23,7 +23,7 @@ var entityCentres = {
 	};
 
 // Paradoteo 1: Allages twn xrwmatwn stis mpales
-var fill = d3.scale.ordinal().range(["#ffbc49", "#d549ff", "#49a1ff"]);
+var fill = d3.scale.ordinal().range(["#A92330", "#787375", "#F19EB8"]);
 
 var svgCentre = { 
     x: w / 3.6, y: h / 2

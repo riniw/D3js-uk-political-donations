@@ -75,6 +75,30 @@ li {
     top: 550px;
 }
 
+/*paradoteo 1 nea view  */
+
+#split1, #split2, #split3, #split4{
+    
+}
+#split1{
+    top: 150px;
+    left: -200px;
+}
+#split2{
+    top: 150px;
+    left: 400px;
+
+}
+#split3{
+    top: 600px;
+    left: -200px;
+
+}
+#split4{
+    top: 600px;
+    left: 400px;
+}
+
 /*	Donor type layout */
 #view-donor-type {
     height: 100%;

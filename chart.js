@@ -22,7 +22,7 @@ var entityCentres = {
 		individual: {x: w / 3.65, y: h / 3.3},
 	};
 
-// Paradoteo 1: Allages twn xrwmatwn stis mpales
+//  allages twn xrwmatwn stis mpales
 var fill = d3.scale.ordinal().range(["#A92330", "#787375", "#F19EB8"]);
 
 var svgCentre = { 
@@ -81,6 +81,8 @@ function transition(name) {
 		$("#new-view").fadeOut(250);
 		return fundsType();
 	}
+	
+	//nea katigoria
 	if (name === "group-by-amount-type") {
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
@@ -111,7 +113,7 @@ function start() {
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout)
-		// Paradoteo 1: kartela google anazitisis
+		// anoigei sto google kartela anazitisis
 		.on("click",  function(d) {
  		window.open("https://www.google.com/search?q=" +  d.donor) ;
 		});
@@ -208,6 +210,7 @@ function all(e) {
 			.attr("cy", function(d) {return d.y; });
 }
 
+//nea katigoria
 function moveToAmounts(alpha){
 	return function(d) {
 		var centreY = 135;
@@ -378,9 +381,10 @@ function mouseover(d, i) {
 	var entity = d.entityLabel;
 	var offset = $("svg").offset();
 	
-	//Paradoteo 1 : Anaparagwgh onomatos doriti kai posou dwreas
+	//dimiourgia omilias
 	
-	responsiveVoice.speak( donor + amount + "pounds");
+	responsiveVoice.speak("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
+	//( donor + amount + "pounds");
 
 	// image url that want to check
 	var imageFile = "https://raw.githubusercontent.com/ioniodi/D3js-uk-political-donations/master/photos/" + donor + ".ico";
@@ -414,7 +418,7 @@ function mouseover(d, i) {
 
 function mouseout() {
 	
-	//Paradoteo 1: Cancel tou hxou otan ginetai mouseout
+	//katargisitou hxou otan ginetai mouseout
 		responsiveVoice.cancel();
 		
 	// no more tooltips

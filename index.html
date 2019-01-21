@@ -30,7 +30,7 @@
     })();
         
     //Paradoteo 1: Prosthiki hxou
-    var my_sound  = new Audio("Bubble.mp3");
+    var sound = new Audio("Bubble.mp3");
     </script>
 
 </head>
@@ -44,15 +44,15 @@
         <h1>Who's funding the big three?</h1>
     </header>
     <nav role="navigation">
-        <ul>
+        <ul onmousedown="sound.play()">
             <!-- Paradoteo 1: Prosthiki hxou -->
-            <li><a href="#" onmousedown="my_sound.play()" role="button" class="pure-button switch" id="all-donations" >All money</a>
+            <li><a href="#" role="button" class="pure-button switch" id="all-donations" >All money</a>
             </li>
-            <li><a href="#" onmousedown="my_sound.play()" role="button" class="pure-button switch" id="group-by-money-source" >The public's purse</a>
+            <li><a href="#"  role="button" class="pure-button switch" id="group-by-money-source" >The public's purse</a>
             </li>
-            <li><a href="#" onmousedown="my_sound.play()" role="button" class="pure-button switch" id="group-by-party" >Split by party</a>
+            <li><a href="#"  role="button" class="pure-button switch" id="group-by-party" >Split by party</a>
             </li>
-            <li><a href="#" onmousedown="my_sound.play()" role="button" class="pure-button switch" id="group-by-donor-type" >Split by type of donor</a>
+            <li><a href="#"  role="button" class="pure-button switch" id="group-by-donor-type" >Split by type of donor</a>
             </li>
             <!-- Paradoteo 1: Prosthiki koumpiou omadopoihshs-->
              <li><a href="#" onmousedown="my_sound.play()" role="button" class="pure-button switch" id="group-by-amount-type" >Split by the amount of the donation</a>

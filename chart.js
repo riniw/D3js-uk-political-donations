@@ -408,18 +408,7 @@ function mouseover(d, i) {
     .style("top", (parseInt(d3.select(this).attr("cy") - (d.radius+150)) + offset.top) + "px")
 		.html(infoBox)
 			.style("display","block");
-	//Paradoteo 2: emfanisi eikonwn dwrhtwn
 	
-	if ((elegxos.indexOf(donor) > -1)==false) {
-		var element = document.createElement("img");
-		element.src = imageFile;
-		element.setAttribute("height", "42");
-		element.setAttribute("width", "42");
-		element.onclick = function(){window.open("https://www.google.com/search?q=" + donor)};
-
-		document.getElementById("donation_pics").appendChild(element);
-		elegxos.push(donor);
-	}
 	
 	}
 

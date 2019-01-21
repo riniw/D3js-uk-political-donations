@@ -68,7 +68,7 @@ li {
     left: 610px;
 }
 
-/* Paradoteo 1: Allages twn xrwmatwn twn pediwn*/ 
+
 /*  Party view */ 
 #conservative, #labour, #libdem { padding: 10px; }
 #conservative {
@@ -83,7 +83,7 @@ li {
     background: rgba(248,206,219, 0.8); /*allagi xromatos sto pedio libdem */
     top: 550px;
 }
-/*Paradoteo 1 : new-view */
+/*new-view */
 #split1, #split2, #split3, #split4{
     
 }

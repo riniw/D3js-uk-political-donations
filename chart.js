@@ -51,6 +51,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
+		$("#new-view").fadeOut(250);
 		return total();
 		//location.reload();
 	}
@@ -60,6 +61,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeIn(1000);
+		$("#new-view").fadeOut(250);
 		return partyGroup();
 	}
 	if (name === "group-by-donor-type") {
@@ -68,6 +70,7 @@ function transition(name) {
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-donor-type").fadeIn(1000);
+		$("#new-view").fadeOut(250);
 		return donorType();
 	}
 	if (name === "group-by-money-source")
@@ -77,6 +80,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeIn(1000);
+		$("#new-view").fadeOut(250);
 		return fundsType();
 	}
 
@@ -88,8 +92,8 @@ if (name === "group-by-amount"){
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeOut(1000);
-		$("#view-amount-type").fadeIn(250);
-		return amountType();
+		$("#new-view").fadeIn(1000);
+		return amountsType();
 	}
 }	
 
@@ -110,8 +114,13 @@ function start() {
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout);
+	
+	//anazitisi sti google gia tous dwrites
+	.on("click",  function(d) {
+ 		window.open("https://www.google.com/search?q=" +  d.donor) ;
+		});
 	      
-         	//.on("click", googleSearch);
+         	
 	
 	      
 		// Alternative title based 'tooltips'
@@ -138,13 +147,7 @@ function total() {
 		.start();
 }
 
-function amountType() {
-	force.gravity(0)
-		.friction(0.85)
-		.charge(function(d) { return -Math.pow(d.radius, 2) / 2.5; })
-		.on("tick", amounts)
-		.start();
-}
+
 
 function partyGroup() {
 	force.gravity(0)
@@ -170,6 +173,16 @@ function fundsType() {
 		.on("tick", types)
 		.start();
 }
+
+function amountsType(){
+		force.gravity(0)
+		.friction(0.8)
+		.charge(function(d) { return -Math.pow(d.radius, 2.0) / 3; })
+		.on("tick", amount)
+		.start();
+	
+}
+
 
 function amounts(e) {
 	node.each(moveToAmount(e.alpha));
@@ -232,6 +245,35 @@ function moveToCentre(alpha) {
 
 		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 1.2;
 		d.y += (centreY - 100 - d.y) * (brake + 0.06) * alpha * 1.2;
+	};
+}
+
+//nea sinartisi gia amounts
+function moveToAmounts(alpha){
+	return function(d) {
+		var centreY = 135;
+		var centreX = 500;
+		
+		if (d.value >= 500000) {
+			centreY = 330;
+			centreX = 300;
+
+		} else if (d.value>= 100000) {
+			centreY = 300;
+			centreX = 750;
+
+		} else if (d.value >= 50000) {
+			centreY = 530;
+			centreX = 300;
+
+		} else  if (d.value >= 0) {
+			centreY = 600;
+			centreX = 750;
+
+		}
+		
+		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
+		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
 	};
 }
 
@@ -355,6 +397,9 @@ function mouseover(d, i) {
 	var offset = $("svg").offset();
 	
 
+	//dimiourgia omilias
+	responsiveVoice.speak("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
+
 
 	// image url that want to check
 	var imageFile = "https://raw.githubusercontent.com/ioniodi/D3js-uk-political-donations/master/photos/" + donor + ".ico";
@@ -384,14 +429,19 @@ function mouseover(d, i) {
 			.style("display","block");
 	
 	//!!!! dimiourgia omilias!!!!
-	var omilia = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
-	window.speechSynthesis.speak(omilia);
+	//var omilia = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
+	//window.speechSynthesis.speak(omilia);
 
 	
 	
 	}
 
 function mouseout() {
+	
+	
+	//Paradoteo 1: Cancel tou hxou otan ginetai mouseout
+		responsiveVoice.cancel();
+	
 	// no more tooltips
 		var mosie = d3.select(this);
 

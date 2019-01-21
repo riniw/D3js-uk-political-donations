@@ -5,7 +5,7 @@ var nodes = [];
 var force, node, data, maxVal;
 var brake = 0.2;
 var radius = d3.scale.sqrt().range([10, 20]);
-
+var elegxos = [];
 
 var partyCentres = { 
     con: { x: w / 3, y: h / 3.3}, 
@@ -22,9 +22,8 @@ var entityCentres = {
 		individual: {x: w / 3.65, y: h / 3.3},
 	};
 
-// allagi xromaton stis mpales
-
-var fill = d3.scale.ordinal().range(["#A92330", "#787375", "#F19EB8"]);
+// Paradoteo 1: Allages twn xrwmatwn stis mpales
+var fill = d3.scale.ordinal().range(["#ffbc49", "#d549ff", "#49a1ff"]);
 
 var svgCentre = { 
     x: w / 3.6, y: h / 2
@@ -73,8 +72,7 @@ function transition(name) {
 		$("#new-view").fadeOut(250);
 		return donorType();
 	}
-	if (name === "group-by-money-source")
-	{
+	if (name === "group-by-money-source") {
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
 		$("#view-donor-type").fadeOut(250);
@@ -83,19 +81,18 @@ function transition(name) {
 		$("#new-view").fadeOut(250);
 		return fundsType();
 	}
-
-if (name === "group-by-amount"){
-		sound.currentTime=0; 
-		sound.play();
+	if (name === "group-by-amount-type") {
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
-		$("#view-source-type").fadeOut(1000);
+		$("#view-source-type").fadeOut(250);
 		$("#new-view").fadeIn(1000);
 		return amountsType();
+		
+	}	
+	  
 	}
-}	
 
 function start() {
 
@@ -113,16 +110,11 @@ function start() {
 		.attr("r", 0)
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
-		.on("mouseout", mouseout);
-	
-	//anazitisi sti google gia tous dwrites
-	.on("click",  function(d) {
+		.on("mouseout", mouseout)
+		// Paradoteo 1: kartela google anazitisis
+		.on("click",  function(d) {
  		window.open("https://www.google.com/search?q=" +  d.donor) ;
 		});
-	      
-         	
-	
-	      
 		// Alternative title based 'tooltips'
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
@@ -146,8 +138,6 @@ function total() {
 		.on("tick", all)
 		.start();
 }
-
-
 
 function partyGroup() {
 	force.gravity(0)
@@ -173,7 +163,6 @@ function fundsType() {
 		.on("tick", types)
 		.start();
 }
-
 function amountsType(){
 		force.gravity(0)
 		.friction(0.8)
@@ -182,17 +171,13 @@ function amountsType(){
 		.start();
 	
 }
-
-
-function amounts(e) {
-	node.each(moveToAmount(e.alpha));
+function amount(e) {
+	node.each(moveToAmounts(e.alpha));
 
 		node.attr("cx", function(d) { return d.x; })
-			.attr("cy", function(d) {return d.y; });
+			.attr("cy", function(d) {return d.y; });	
+	
 }
-
-
-
 function parties(e) {
 	node.each(moveToParties(e.alpha));
 
@@ -223,32 +208,6 @@ function all(e) {
 			.attr("cy", function(d) {return d.y; });
 }
 
-
-function moveToCentre(alpha) {
-	return function(d) {
-		var centreX = svgCentre.x + 75;
-			if (d.value <= 25001) {
-				centreY = svgCentre.y + 75;
-			} else if (d.value <= 50001) {
-				centreY = svgCentre.y + 55;
-			} else if (d.value <= 100001) {
-				centreY = svgCentre.y + 35;
-			} else  if (d.value <= 500001) {
-				centreY = svgCentre.y + 15;
-			} else  if (d.value <= 1000001) {
-				centreY = svgCentre.y - 5;
-			} else  if (d.value <= maxVal) {
-				centreY = svgCentre.y - 25;
-			} else {
-				centreY = svgCentre.y;
-			}
-
-		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 1.2;
-		d.y += (centreY - 100 - d.y) * (brake + 0.06) * alpha * 1.2;
-	};
-}
-
-//nea sinartisi gia amounts
 function moveToAmounts(alpha){
 	return function(d) {
 		var centreY = 135;
@@ -274,6 +233,29 @@ function moveToAmounts(alpha){
 		
 		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
 		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
+	};
+}
+function moveToCentre(alpha) {
+	return function(d) {
+		var centreX = svgCentre.x + 75;
+			if (d.value <= 25001) {
+				centreY = svgCentre.y + 75;
+			} else if (d.value <= 50001) {
+				centreY = svgCentre.y + 55;
+			} else if (d.value <= 100001) {
+				centreY = svgCentre.y + 35;
+			} else  if (d.value <= 500001) {
+				centreY = svgCentre.y + 15;
+			} else  if (d.value <= 1000001) {
+				centreY = svgCentre.y - 5;
+			} else  if (d.value <= maxVal) {
+				centreY = svgCentre.y - 25;
+			} else {
+				centreY = svgCentre.y;
+			}
+
+		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 1.2;
+		d.y += (centreY - 100 - d.y) * (brake + 0.06) * alpha * 1.2;
 	};
 }
 
@@ -396,10 +378,9 @@ function mouseover(d, i) {
 	var entity = d.entityLabel;
 	var offset = $("svg").offset();
 	
-
-	//dimiourgia omilias
-	responsiveVoice.speak("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
-
+	//Paradoteo 1 : Anaparagwgh onomatos doriti kai posou dwreas
+	
+	responsiveVoice.speak( donor + amount + "pounds");
 
 	// image url that want to check
 	var imageFile = "https://raw.githubusercontent.com/ioniodi/D3js-uk-political-donations/master/photos/" + donor + ".ico";
@@ -427,21 +408,26 @@ function mouseover(d, i) {
     .style("top", (parseInt(d3.select(this).attr("cy") - (d.radius+150)) + offset.top) + "px")
 		.html(infoBox)
 			.style("display","block");
+	//Paradoteo 2: emfanisi eikonwn dwrhtwn
 	
-	//!!!! dimiourgia omilias!!!!
-	//var omilia = new SpeechSynthesisUtterance("Donators name is " + donor + " and the donation amount is " + amount + " pounds");
-	//window.speechSynthesis.speak(omilia);
+	if ((elegxos.indexOf(donor) > -1)==false) {
+		var element = document.createElement("img");
+		element.src = imageFile;
+		element.setAttribute("height", "42");
+		element.setAttribute("width", "42");
+		element.onclick = function(){window.open("https://www.google.com/search?q=" + donor)};
 
-	
+		document.getElementById("donation_pics").appendChild(element);
+		elegxos.push(donor);
+	}
 	
 	}
 
 function mouseout() {
 	
-	
 	//Paradoteo 1: Cancel tou hxou otan ginetai mouseout
 		responsiveVoice.cancel();
-	
+		
 	// no more tooltips
 		var mosie = d3.select(this);
 
@@ -451,6 +437,8 @@ function mouseout() {
 			.style("display", "none");
 		}
 
+		
+
 $(document).ready(function() {
 		d3.selectAll(".switch").on("click", function(d) {
       var id = d3.select(this).attr("id");
@@ -459,11 +447,4 @@ $(document).ready(function() {
     return d3.csv("data/7500up.csv", display);
 
 });
-
-/*/sinartisi gia apotelesmata doriton
-function googleSearch(d) {
-  var donor = d.donor;
-  window.open("https://www.google.com/search?q=" + donor);
-} */
-
 
